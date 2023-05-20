@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-# 哪吒的4个参数
-NEZHA_SERVER="data.tcguangda.eu.org"
-NEZHA_PORT="443"
-NEZHA_KEY="DPjfSJBWlCaACijlAI"
-NEZHA_TLS="1"
+# 哪吒的三个参数
+NEZHA_SERVER=data.tcguangda.eu.org
+NEZHA_PORT=443
+NEZHA_KEY=tG9IMCI6rctplO9W0o
+TLS='--tls'
 
 # 检测是否已运行
 check_run() {
-  [[ $(pgrep -laf nezha-agent) ]] && echo "哪吒客户端正在运行中!" && exit
+  [[ $(pgrep -lafx nezha-agent) ]] && echo "哪吒客户端正在运行中" && exit
 }
 
 # 三个变量不全则不安装哪吒客户端
@@ -20,20 +20,19 @@ check_variable() {
 download_agent() {
   if [ ! -e nezha-agent ]; then
     URL=$(wget -qO- -4 "https://api.github.com/repos/naiba/nezha/releases/latest" | grep -o "https.*linux_amd64.zip")
-    wget -t 2 -T 10 -N ${URL}
+    URL=${URL:-https://github.com/naiba/nezha/releases/download/v0.14.11/nezha-agent_linux_amd64.zip}
+    wget ${URL}
     unzip -qod ./ nezha-agent_linux_amd64.zip && rm -f nezha-agent_linux_amd64.zip
   fi
 }
 
-# 运行客户端
+# 运行 Nezha 客户端
 run() {
-  TLS=${NEZHA_TLS:+'--tls'}
-  [[ ! $PROCESS =~ nezha-agent && -e nezha-agent ]] && ./nezha-agent -s ${NEZHA_SERVER}:${NEZHA_PORT} -p ${NEZHA_KEY} ${TLS} 2>&1 &
+  [ -e nezha-agent ] && nohup ./nezha-agent -s ${NEZHA_SERVER}:${NEZHA_PORT} -p ${NEZHA_KEY} ${TLS} >/dev/null 2>&1 &
 }
 
 check_run
 check_variable
 download_agent
 run
-wait
 
