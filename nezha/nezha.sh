@@ -3,7 +3,7 @@
 # 哪吒的4个参数
 NEZHA_SERVER="data.841013.xyz"
 NEZHA_PORT="443"
-NEZHA_KEY="D0xtX0GrqSMb9nK863"
+NEZHA_KEY="tG9IMCI6rctplO9W0o"
 NEZHA_TLS="1"
 
 # 检测是否已运行
