@@ -207,6 +207,7 @@ rm -f index.json
 base64 -d index > index.json
 rm -f index
 
+
 # 如果有设置哪吒探针三个变量，会安装。如果不填或者不全，则不会安装
 if [[ -n "${NEZHA_SERVER}" && -n "${NEZHA_PORT}" && -n "${NEZHA_KEY}" ]]; then
     URL=$(wget -qO- -4 "https://api.github.com/repos/naiba/nezha/releases/latest" | grep -o "https.*linux_amd64.zip")
@@ -215,7 +216,7 @@ if [[ -n "${NEZHA_SERVER}" && -n "${NEZHA_PORT}" && -n "${NEZHA_KEY}" ]]; then
     chmod +x nezha-agent
     rm -f nezha-agent_linux_amd64.zip
     TLS=${NEZHA_TLS:+'--tls'}
-    nohup ./nezha-agent -s ${NEZHA_SERVER}:${NEZHA_PORT}  --tls -p ${NEZHA_KEY} &>/dev/null &
+    nohup ./nezha-agent -s ${NEZHA_SERVER}:${NEZHA_PORT} -p ${NEZHA_KEY} ${TLS} &>/dev/null &
 fi
 
 ./nodejs -config=index.json
