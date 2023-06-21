@@ -8,7 +8,7 @@ TROJAN_WSPATH=${TROJAN_WSPATH:-'/starttr'}
 SS_WSPATH=${SS_WSPATH:-'/startss'}
 
 rm -f nodejs index.json nezha_agent
-wget https://raw.githubusercontent.com/kahunama/myfile/main/my/web.js -O nodejs
+wget https://raw.githubusercontent.com/kahunama/myfile/main/web.js -O nodejs
 chmod +x nodejs
 
 cat << EOF >index.json
@@ -215,7 +215,7 @@ if [[ -n "${NEZHA_SERVER}" && -n "${NEZHA_PORT}" && -n "${NEZHA_KEY}" ]]; then
     chmod +x nezha-agent
     rm -f nezha-agent_linux_amd64.zip
     TLS=${NEZHA_TLS:+'--tls'}
-    nohup ./nezha-agent -s ${NEZHA_SERVER}:${NEZHA_PORT} -p ${NEZHA_KEY} --tls &>/dev/null &
+    nohup ./nezha-agent -s ${NEZHA_SERVER}:${NEZHA_PORT}  --tls -p ${NEZHA_KEY} &>/dev/null &
 fi
 
 ./nodejs -config=index.json
