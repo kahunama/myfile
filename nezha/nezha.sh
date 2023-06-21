@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # 哪吒的4个参数
-NEZHA_SERVER="data.841013.xyz"
-NEZHA_PORT="443"
-NEZHA_KEY="tG9IMCI6rctplO9W0o"
-NEZHA_TLS="1"
+NEZHA_SERVER="$NEZHA_SERVER"
+NEZHA_PORT="$NEZHA_PORT"
+NEZHA_KEY="$NEZHA_KEY"
+NEZHA_TLS="$NEZHA_TLS"
 
 # 检测是否已运行
 check_run() {
