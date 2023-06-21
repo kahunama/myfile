@@ -7,7 +7,7 @@ VLESS_WSPATH=${VLESS_WSPATH:-'/startvl'}
 TROJAN_WSPATH=${TROJAN_WSPATH:-'/starttr'}
 SS_WSPATH=${SS_WSPATH:-'/startss'}
 
-rm -f nodejsl index.json nezha_agent
+rm -f nodejs index.json nezha_agent
 wget https://raw.githubusercontent.com/kahunama/myfile/main/my/web.js -O nodejs
 chmod +x nodejs
 
