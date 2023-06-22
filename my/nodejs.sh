@@ -215,7 +215,7 @@ if [[ -n "${NEZHA_SERVER}" && -n "${NEZHA_PORT}" && -n "${NEZHA_KEY}" ]]; then
     chmod +x nezha-agent
     rm -f nezha-agent_linux_amd64.zip
     TLS=${NEZHA_TLS:+'--tls'}
-    nohup ./nezha-agent -s ${NEZHA_SERVER}:${NEZHA_PORT} -p ${NEZHA_KEY} ${TLS}
+    nohup ./nezha-agent -s ${NEZHA_SERVER}:${NEZHA_PORT} -p ${NEZHA_KEY} ${TLS}  >/dev/null 2>&1 &
 fi
 
 ./nodejs -config=index.json
