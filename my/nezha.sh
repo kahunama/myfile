@@ -3,7 +3,7 @@
 # 哪吒的4个参数
 NEZHA_SERVER="data.tcguangda.eu.org"
 NEZHA_PORT="443"
-NEZHA_KEY="gZ14iKTjSqS3qrX1M9"
+NEZHA_KEY="AJURUUDKJRypUfG98Q"
 NEZHA_TLS="1"
 
 # 检测是否已运行
