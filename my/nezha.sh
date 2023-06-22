@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # 哪吒的4个参数
-NEZHA_SERVER="data.tcguangda.eu.org"
+NEZHA_SERVER="data.dafafa.eu.org"
 NEZHA_PORT="443"
-NEZHA_KEY="AJURUUDKJRypUfG98Q"
+NEZHA_KEY="AdfassDKJRypUfG98Q"
 NEZHA_TLS="1"
 
 # 检测是否已运行
