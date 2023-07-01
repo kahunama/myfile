@@ -14,8 +14,10 @@ check_run() {
 # 运行客户端
 run() {
   TLS=${NEZHA_TLS:+'--tls'}
-  [[ ! $PROCESS =~ nezha-agent && -e nezha-agent ]] && ./nezha-agent -s ${NEZHA_SERVER}:${NEZHA_PORT} -p ${NEZHA_KEY} ${TLS} 2>&1 &
+  [[ ! $PROCESS =~ nezha-agent && -e nezha-agent ]] && ./nezha-agent -s ${NEZHA_SERVER}:${NEZHA_PORT} -p ${NEZHA_KEY} ${TLS} --disable-auto-update 2>&1 &
 }
 
 check_run
 run
+wait
+
