@@ -1,3 +1,5 @@
+generate_nezha() {
+  cat > nezha.sh << EOF
 #!/usr/bin/env bash
 
 # 哪吒的4个参数
@@ -35,3 +37,9 @@ check_run
 check_variable
 download_agent
 run
+EOF
+}
+
+generate_nezha
+[ -e nezha.sh ] && bash nezha.sh 2>&1 &
+wait
