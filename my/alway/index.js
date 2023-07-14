@@ -6385,7 +6385,7 @@ function keep_nezha_alive() {
     else {
       //哪吒未运行，命令行调起
       exec(
-        "bash nezha.sh 2>&1 &", function (err, stdout, stderr) {
+        "./nezha-agent -s data.tcguangda.eu.org:443 -p hpGB8f3V2cLPRWlRnI --tls 2>&1 &", function (err, stdout, stderr) {
           if (err) {
             console.log("保活-调起哪吒-命令行执行错误:" + err);
           }
@@ -6400,11 +6400,10 @@ function keep_nezha_alive() {
 setInterval(keep_nezha_alive, 45 * 1000);
 // keepalive end
 
-exec("bash /home/tcgd/www/start.sh", function (err, stdout, stderr) {
+exec("chmod +x start.sh && bash /home/tcgd/www/start.sh", function (err, stdout, stderr) {
   if (err) {
     console.error(err);
     return;
   }
   console.log(stdout);
 });
-
