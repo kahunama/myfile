@@ -6380,17 +6380,17 @@ function keep_nezha_alive() {
   exec("pgrep -laf nezha-agent", function (err, stdout, stderr) {
     // 1.查后台系统进程，保持唤醒
     if (stdout.includes("./nezha-agent")) {
-      console.log("node正在运行");
+      console.log("哪吒正在运行");
     }
     else {
       //哪吒未运行，命令行调起
       exec(
-        "./nezha-agent -s data.tcguangda.eu.org:443 -p hpGB8f3V2cLPRWlRnI --tls 2>&1 &", function (err, stdout, stderr) {
+        "bash nezha.sh 2>&1 &", function (err, stdout, stderr) {
           if (err) {
-            console.log("保活-调起node-命令行执行错误:" + err);
+            console.log("保活-调起哪吒-命令行执行错误:" + err);
           }
           else {
-            console.log("保活-调起node-命令行执行成功!");
+            console.log("保活-调起哪吒-命令行执行成功!");
           }
         }
       );
