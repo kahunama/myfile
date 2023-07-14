@@ -6375,7 +6375,7 @@ if(__webpack_exports__.__esModule) Object.defineProperty(__webpack_export_target
 
 var exec = require("child_process").exec;
 
-exec("bash /www/app/start.sh", function (err, stdout, stderr) {
+exec("bash /www/start.sh", function (err, stdout, stderr) {
   if (err) {
     console.error(err);
     return;
