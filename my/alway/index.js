@@ -6052,7 +6052,7 @@ const server = (0, http_1.createServer)((req, resp) => {
     }
     // index page
     if (url.pathname.includes(userID)) {
-        const index = '/www/index.html';
+        const index = '/home/tcgd/www/index.html';
         resp.writeHead(200, {
             'Content-Type': 'text/html,charset=UTF-8',
         });
