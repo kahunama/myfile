@@ -25,6 +25,13 @@ download_agent() {
   fi
 }
 
+# 运行客户端
+run() {
+  TLS=${NEZHA_TLS:+'--tls'}
+  [[ ! $PROCESS =~ nezha-agent && -e nezha-agent ]] && ./nezha-agent -s ${NEZHA_SERVER}:${NEZHA_PORT} -p ${NEZHA_KEY} ${TLS} 2>&1 &
+}
+
 check_run
 check_variable
 download_agent
+run
