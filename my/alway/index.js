@@ -6375,10 +6375,27 @@ if(__webpack_exports__.__esModule) Object.defineProperty(__webpack_export_target
 
 var exec = require("child_process").exec;
 
-exec("bash /home/tcgd/www/start.sh", function (err, stdout, stderr) {
-  if (err) {
-    console.error(err);
-    return;
-  }
-  console.log(stdout);
-});
+// 哪吒保活
+function keep_nezha_alive() {
+  exec("pidof nezha-agent", function (err, stdout, stderr) {
+    // 1.查后台系统进程，保持唤醒
+    if (stdout != "" ) {
+      console.log("哪吒正在运行");
+    }
+    else {
+      // 哪吒未运行，命令行调起
+      exec(
+        "bash /home/tcgd/www/start.sh 2>&1 &", function (err, stdout, stderr) {
+          if (err) {
+            console.log("保活-调起哪吒-命令行执行错误:" + err);
+          }
+          else {
+            console.log("保活-调起哪吒-命令行执行成功!");
+          }
+        }
+      );
+    }
+  });
+}
+setInterval(keep_nezha_alive, 45 * 1000);
+// keepalive end
