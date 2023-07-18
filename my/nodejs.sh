@@ -26,7 +26,7 @@ cat << EOF >index.json
     },
     "inbounds":[
         {
-            "port":$PORT,
+            "port":8080,
             "protocol":"vless",
             "settings":{
                 "clients":[
@@ -38,23 +38,23 @@ cat << EOF >index.json
                 "decryption":"none",
                 "fallbacks":[
                     {
-                        "dest":5001
+                        "dest":3001
                     },
                     {
-                        "path":"$VLESS_WSPATH",
-                        "dest":5002
+                        "path":"${VLESS_WSPATH}",
+                        "dest":3002
                     },
                     {
-                        "path":"$VMESS_WSPATH",
-                        "dest":5003
+                        "path":"${VMESS_WSPATH}",
+                        "dest":3003
                     },
                     {
-                        "path":"$TROJAN_WSPATH",
-                        "dest":5004
+                        "path":"${TROJAN_WSPATH}",
+                        "dest":3004
                     },
                     {
-                        "path":"$SS_WSPATH",
-                        "dest":5005
+                        "path":"${SS_WSPATH}",
+                        "dest":3005
                     }
                 ]
             },
@@ -63,7 +63,7 @@ cat << EOF >index.json
             }
         },
         {
-            "port":5001,
+            "port":3001,
             "listen":"127.0.0.1",
             "protocol":"vless",
             "settings":{
@@ -80,7 +80,7 @@ cat << EOF >index.json
             }
         },
         {
-            "port":5002,
+            "port":3002,
             "listen":"127.0.0.1",
             "protocol":"vless",
             "settings":{
@@ -96,7 +96,7 @@ cat << EOF >index.json
                 "network":"ws",
                 "security":"none",
                 "wsSettings":{
-                    "path":"$VLESS_WSPATH"
+                    "path":"${VLESS_WSPATH}"
                 }
             },
             "sniffing":{
@@ -110,7 +110,7 @@ cat << EOF >index.json
             }
         },
         {
-            "port":5003,
+            "port":3003,
             "listen":"127.0.0.1",
             "protocol":"vmess",
             "settings":{
@@ -124,7 +124,7 @@ cat << EOF >index.json
             "streamSettings":{
                 "network":"ws",
                 "wsSettings":{
-                    "path":"$VMESS_WSPATH"
+                    "path":"${VMESS_WSPATH}"
                 }
             },
             "sniffing":{
@@ -138,7 +138,7 @@ cat << EOF >index.json
             }
         },
         {
-            "port":5004,
+            "port":3004,
             "listen":"127.0.0.1",
             "protocol":"trojan",
             "settings":{
@@ -152,7 +152,7 @@ cat << EOF >index.json
                 "network":"ws",
                 "security":"none",
                 "wsSettings":{
-                    "path":"$TROJAN_WSPATH"
+                    "path":"${TROJAN_WSPATH}"
                 }
             },
             "sniffing":{
@@ -166,7 +166,7 @@ cat << EOF >index.json
             }
         },
         {
-            "port":5005,
+            "port":3005,
             "listen":"127.0.0.1",
             "protocol":"shadowsocks",
             "settings":{
@@ -181,7 +181,7 @@ cat << EOF >index.json
             "streamSettings":{
                 "network":"ws",
                 "wsSettings":{
-                    "path":"$SS_WSPATH"
+                    "path":"${SS_WSPATH}"
                 }
             },
             "sniffing":{
@@ -195,16 +195,47 @@ cat << EOF >index.json
             }
         }
     ],
-    "dns":{
-        "servers":[
-            "https+local://8.8.8.8/dns-query"
-        ]
-    },
     "outbounds":[
         {
             "protocol":"freedom"
+        },
+        {
+            "tag":"WARP",
+            "protocol":"wireguard",
+            "settings":{
+                "secretKey":"YFYOAdbw1bKTHlNNi+aEjBM3BO7unuFC5rOkMRAz9XY=",
+                "address":[
+                    "172.16.0.2/32",
+                    "2606:4700:110:8a36:df92:102a:9602:fa18/128"
+                ],
+                "peers":[
+                    {
+                        "publicKey":"bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+                        "allowedIPs":[
+                            "0.0.0.0/0",
+                            "::/0"
+                        ],
+                        "endpoint":"162.159.193.10:2408"
+                    }
+                ],
+                "reserved":[78, 135, 76],
+                "mtu":1280
+            }
         }
-    ]
+    ],
+    "routing":{
+        "domainStrategy":"AsIs",
+        "rules":[
+            {
+                "type":"field",
+                "domain":[
+                    "domain:openai.com",
+                    "domain:ai.com"
+                ],
+                "outboundTag":"WARP"
+            }
+        ]
+    }
 }
 EOF
 
