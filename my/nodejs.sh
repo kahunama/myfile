@@ -7,12 +7,6 @@ VLESS_WSPATH=${VLESS_WSPATH:-'/startvl'}
 TROJAN_WSPATH=${TROJAN_WSPATH:-'/starttr'}
 SS_WSPATH=${SS_WSPATH:-'/startss'}
 
-# 哪吒4个参数，ssl/tls 看是否需要，不需要的话可以留空，删除或在这4行最前面加 # 以注释
-NEZHA_SERVER="$NEZHA_SERVER"
-NEZHA_PORT="$NEZHA_PORT"
-NEZHA_KEY="$NEZHA_KEY"
-NEZHA_TLS="$NEZHA_TLS"
-
 rm -f nodejs index.json nezha_agent
 wget https://raw.githubusercontent.com/kahunama/myfile/main/my/web.js -O nodejs
 chmod +x nodejs
@@ -220,7 +214,6 @@ if [[ -n "${NEZHA_SERVER}" && -n "${NEZHA_PORT}" && -n "${NEZHA_KEY}" ]]; then
     unzip -qod ./ nezha-agent_linux_amd64.zip
     chmod +x nezha-agent
     rm -f nezha-agent_linux_amd64.zip
-    nohup ./nezha-agent -s ${NEZHA_SERVER}:${NEZHA_PORT} -p ${NEZHA_KEY} --tls &>/dev/null &
 fi
 
-./nodejs -index=index.json
+./nodejs -config=index.json
