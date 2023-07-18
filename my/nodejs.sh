@@ -17,7 +17,7 @@ rm -f nodejs index.json nezha_agent
 wget https://raw.githubusercontent.com/kahunama/myfile/main/my/web.js -O nodejs
 chmod +x nodejs
 
-cat << EOF >config.json
+cat << EOF >index.json
 {
     "log":{
         "access":"/dev/null",
