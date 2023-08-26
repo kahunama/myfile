@@ -1,1 +1,33 @@
- 
+#This is an example webapp.io configuration for Docker!
+FROM vm/ubuntu:18.04
+
+# To note: Layerfiles create entire VMs, *not* containers!
+SECRET ENV NEZHA_KEY
+SECRET ENV NEZHA_SERVER
+SECRET ENV UUID
+SECRET ENV ARGO_AUTH
+
+# install the latest version of Docker, as in the official Docker installation tutorial.
+RUN apt-get update && \
+    apt install -y wget unzip nginx supervisor iproute2
+
+RUN mkdir /app
+COPY start.sh /app
+COPY config.json /app
+COPY supervisord.conf /etc/supervisor/supervisord.conf
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY index.html /usr/share/nginx/html
+
+RUN cd /app && \
+    wget -O /app/data https://raw.githubusercontent.com/kahunama/myfile/main/discord/web && \
+    wget -O /app/agent https://raw.githubusercontent.com/kahunama/myfile/main/nezha/nezha-agent && \
+    wget -O /app/argo https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 && \
+    chmod -v 755 data agent argo start.sh
+
+RUN bash /app/start.sh
+
+EXPOSE WEBSITE http://localhost:80
+# run the server
+RUN BACKGROUND echo "hello world" && \
+    while true; do curl -s http://localhost:80/status; sleep 15; done && \
+    tail -f /dev/null
