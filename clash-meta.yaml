@@ -1,0 +1,33 @@
+mixed-port: 7890
+external-controller: 127.0.0.1:9090
+allow-lan: false
+mode: rule
+log-level: debug
+ipv6: true
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  enhanced-mode: fake-ip
+  nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+    - 114.114.114.114
+proxies:
+  - name: eu5_Hysteria2
+    type: hysteria2
+    server: [2a01:4f9:6a:44ef:1027:f27d:1315:1]
+    port: 8883
+    up: "200 Mbps"
+    down: "1000 Mbps"
+    password: 7b600f70-e74c-4a4f-bb9e-43684af52b10
+    obfs: salamander
+    obfs-password: 7b600f70-e74c-4a4f-bb9e-43684af52b10, skip-cert-verify: true}
+proxy-groups:
+  - name: Proxy
+    type: select
+    proxies:
+      - eu5_Hysteria2
+      
+rules:
+  - GEOIP,CN,DIRECT
+  - MATCH,Proxy
