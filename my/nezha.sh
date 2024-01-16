@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # 哪吒的4个参数
-NEZHA_SERVER="data.tcguangda.eu.org"
+NEZHA_SERVER="nezha.tcguangda.eu.org"
 NEZHA_PORT="443"
 NEZHA_KEY="RubHy2QQtSrdBF5frS"
 NEZHA_TLS="1"
